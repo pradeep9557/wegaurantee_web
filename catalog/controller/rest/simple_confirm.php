@@ -17,7 +17,7 @@ class ControllerRestSimpleConfirm extends RestController
 {
     public function addOrder(){
         $this->checkPlugin();
-        error_log('-----------------------------------asd');
+        //error_log('-----------------------------------asd');
         error_log($this->session->data['order_id']);
         error_log(json_encode($_SERVER));
         $post = $this->getPost();
