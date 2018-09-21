@@ -1,0 +1,139 @@
+2018-01-01 15:11:30 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: d_social_login
+FILE: admin/model/customer/customer.php
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
+LINE: 58
+----------------------------------------------------------------
+2018-01-01 15:11:34 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: d_social_login
+FILE: admin/model/customer/customer.php
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
+LINE: 58
+----------------------------------------------------------------
+MOD: d_twig_manager
+CODE: $template = new Template($this->registry->get('config')->get('template_engine'));
+LINE: 118
+FILE: system/library/template.php
+CODE: public function __construct($adaptor) {
+LINE: 21
+CODE: $this->adaptor = new $class();
+LINE: 28
+CODE: private $data = array();
+LINE: 8
+CODE: public function __construct() {
+LINE: 10
+CODE: \Twig_Autoloader::register();
+LINE: 21
+CODE: $this->twig = new \Twig_Environment($loader, $config);
+LINE: 52
+FILE: catalog/controller/event/theme.php
+CODE: $twig = new \Twig_Environment($loader, $config);
+LINE: 24
+----------------------------------------------------------------
+2018-01-01 15:54:01 - MOD: Modification Default
+FILE: system/engine/action.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 69
+FILE: system/engine/loader.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 77
+LINE: 151
+LINE: 168
+FILE: system/library/config.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 59
+FILE: system/library/language.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 67
+LINE: 73
+FILE: system/library/template/template.php
+REGEX: ~(require|include)(_once)?\(([^)]+)~
+LINE: 18
+FILE: system/library/template/twig.php
+CODE: $loader = new \Twig_Loader_Filesystem(DIR_TEMPLATE);
+LINE: 19
+----------------------------------------------------------------
+MOD: d_opencart_patch
+FILE: admin/controller/user/user_permission.php
+CODE: $path[] = $file . '/*';
+LINE: 337
+CODE: $permission = substr($controller, 0, strrpos($controller, '.'));
+LINE: 353
+----------------------------------------------------------------
+MOD: d_shopunity
+FILE: admin/controller/common/header.php
+CODE: public function index() {
+LINE: 7
+FILE: admin/view/template/common/header.twig
+CODE: <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ image }}" alt="{{ firstname }} {{ lastname }}" title="{{ username }}" id="user-profile" class="img-circle" />{{ firstname }} {{ lastname }} <i class="fa fa-caret-down fa-fw"></i></a>
+LINE: 43
+----------------------------------------------------------------
+MOD: d_social_login
+FILE: admin/model/customer/customer.php
+CODE: $this->db->query("DELETE FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
+LINE: 58
+----------------------------------------------------------------
+MOD: d_twig_manager
+CODE: $template = new Template($this->registry->get('config')->get('template_engine'));
+LINE: 118
+FILE: system/library/template.php
+CODE: public function __construct($adaptor) {
+LINE: 21
+CODE: $this->adaptor = new $class();
+LINE: 28
+CODE: private $data = array();
+LINE: 8
+CODE: public function __construct() {
+LINE: 10
+CODE: \Twig_Autoloader::register();
+LINE: 21
+CODE: $this->twig = new \Twig_Environment($loader, $config);
+LINE: 52
+FILE: catalog/controller/event/theme.php
+CODE: $twig = new \Twig_Environment($loader, $config);
+LINE: 24
+----------------------------------------------------------------

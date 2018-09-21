@@ -1,0 +1,102 @@
+            <div class="sub-col col-sm-12 col-md-12">
+            <div class="container"> 
+              <div class="tt_product_module " id="product_module112">
+                <div class="module-title">
+                  <h2> Feature Products </h2>
+                  <div class="module-description"> Weguarantee brings a line of products from organic items, health vinegars, to a varied selection of teas and coffees. Our aim is to bring a unique blend of health along with taste right at your doorstep, in no time, guaranteed at its best price with assured quality. </div>
+                </div> 
+				
+				
+                <div class="tt-product  owl-carousel owl-theme "> 
+                  {% for product in products %}
+                  <!-- Grid -->
+                  <div class="row_items ">
+                    <div class="product-layout product-grid">
+                      <div class="product-thumb transition">
+                        <div class="image"> <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a>
+                          <div class="label-product label_new">New</div>
+                          <div class="action-links">
+                            <button class="btn-quickview" type="button" title="Detail View" onclick="quick_open('{{ product.href }}')" ><i class="pe-7s-look"></i><span>Detail View</span></button>
+                          </div>
+                        </div>
+                        <!-- image -->
+                        <div class="caption">
+                        
+                         {% if product.rating %}
+        <div class="ratings"><div class="rating-box">
+          {% for i in 5 %}
+          {% if product.rating < i %}
+          <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% else %}
+          <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
+          {% endif %}
+          {% endfor %}
+        </div></div>
+        {% endif %} 
+                          <h4 class="product-name"><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                          {% if product.price %}
+        <p class="price">
+          {% if not product.special %}
+          {{ product.price }}
+          {% else %}
+          <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+          {% endif %}
+          {% if product.tax %}
+          <span class="price-tax">{{ text_tax }} {{ product.tax }}</span>
+          {% endif %}
+        </p>
+        {% endif %}
+                          <div class="action-links2">
+                            <button type="button" onclick="cart.add('{{ product.product_id }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
+        <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button> 
+                          </div>
+                        </div>
+                        <!-- caption --> 
+                      </div>
+                      <!-- product-thumb --> 
+                    </div>
+                    <!-- product-layout -->  
+                  </div> 
+  {% endfor %}
+                </div>
+              </div>
+              </div>
+               <script type="text/javascript">
+        $(document).ready(function() {
+            $("#product_module112 .tt-product").owlCarousel({
+                loop:  true ,
+                margin:  30 ,
+                nav:  true ,
+                dots:  false ,
+                autoplay:   false ,
+                autoplayTimeout:  3000 ,
+                autoplayHoverPause: true,
+                autoplaySpeed:  1000 ,
+                navSpeed:  1000 ,
+                dotsSpeed:  1000 ,
+				lazyLoad: true,
+				navText : ['<i class="ion-chevron-left"></i>','<i class="ion-chevron-right"></i>'],
+                responsive:{
+					0:{
+						items: 1
+					},
+					481:{
+						items: 2
+					},
+					769:{
+						items: 2
+					},
+					1024:{
+						items: 3
+					},
+					1200:{
+						items: 4
+					},
+                }
+            });
+
+        });
+    </script> 
+            </div> 
+			

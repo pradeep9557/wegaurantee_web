@@ -1,0 +1,213 @@
+[24-Dec-2017 10:34:01 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:46:26 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:46:57 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:46:58 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:46:59 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:00 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:00 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:01 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:02 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:03 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:03 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:04 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:05 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:47:05 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:57:59 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:00 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:00 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:01 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:01 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:18 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:18 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:18 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[24-Dec-2017 10:58:21 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Error: <br />Error No: ' in /home/weguarantee/public_html/new/system/library/db/mysqli.php:10
+Stack trace:
+#0 /home/weguarantee/public_html/new/system/library/db.php(31): DB\MySQLi->__construct('localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#1 /home/weguarantee/public_html/new/system/framework.php(80): DB->__construct('mysqli', 'localhost', 'weguaran_websit...', 'website@1234A', 'weguaran_websit...', '3306')
+#2 /home/weguarantee/public_html/new/system/startup.php(104): require_once('/home/weguarant...')
+#3 /home/weguarantee/public_html/new/admin/index.php(19): start('admin')
+#4 {main}
+  thrown in /home/weguarantee/public_html/new/system/library/db/mysqli.php on line 10
+[27-Jan-2018 12:25:18 UTC] PHP Fatal error:  require(): Failed opening required '/home/weguarantee/public_html/new/system/library/template/Twig/../Twig/Environment.php' (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/weguarantee/public_html/new/system/library/template/Twig/Autoloader.php on line 51
+[23-Feb-2018 15:50:03 Etc/GMT] PHP Warning:  fopen(/home/weguarantee/storage/logs/error.log): failed to open stream: No such file or directory in /home/weguarantee/public_html/new/system/library/log.php on line 22
+[23-Feb-2018 15:50:03 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:50:04 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:50:04 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:50:04 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:50:04 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:50:04 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:50:04 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9
+[23-Feb-2018 15:51:19 Etc/GMT] PHP Warning:  fopen(/home/weguarantee/storage/logs/error.log): failed to open stream: No such file or directory in /home/weguarantee/public_html/new/system/library/log.php on line 22
+[23-Feb-2018 15:51:19 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:19 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:19 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:19 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:19 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:19 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:19 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9
+[23-Feb-2018 15:51:48 Etc/GMT] PHP Warning:  fopen(/home/weguarantee/storage/logs/error.log): failed to open stream: No such file or directory in /home/weguarantee/public_html/new/system/library/log.php on line 22
+[23-Feb-2018 15:51:48 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:48 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:48 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:48 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:48 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:48 UTC] PHP Warning:  fwrite() expects parameter 1 to be resource, boolean given in /home/weguarantee/public_html/new/system/library/log.php on line 31
+[23-Feb-2018 15:51:48 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9
+[23-Feb-2018 16:02:41 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9
+[23-Feb-2018 16:08:59 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9
+[23-Feb-2018 16:09:18 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9
+[23-Feb-2018 16:09:21 UTC] PHP Fatal error:  Class 'Scssc' not found in /home/weguarantee/public_html/new/admin/controller/startup/sass.php on line 9

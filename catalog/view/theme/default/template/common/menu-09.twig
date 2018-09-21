@@ -1,0 +1,152 @@
+{% if categories %} 
+<div class="main-menu">
+	<div class="hozmenu-container">
+		<div class="ma-nav-mobile-container">
+            <div class="hozmenu">
+				<div class="navbar">
+					<div id="navbar-inner" class="navbar-inner navbar-inactive">
+						<div class="menu-mobile"> <span class="brand navbar-brand">Menu</span> <a class="btn btn-navbar navbar-toggle"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> </div> 
+						<ul id="ma-mobilemenu" class="mobilemenu nav-collapse collapse">
+							<li><a href="index.php?route=common/home">Home</a></li>
+							{% for category in categories %}
+							{% if category.children %}
+							<li  class="had_child"><a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
+								{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+								<ul>
+									{% for child in children %}
+									<li><a href="{{ child.href }}">{{ child.name }}</a></li>
+									{% endfor %}
+								</ul>
+								{% endfor %} 
+							</li>
+							{% else %}
+							<li><a href="{{ category.href }}">{{ category.name }}</a></li>
+							{% endif %}
+							{% endfor %}
+						</ul>      </div>
+				</div>
+			</div>
+		</div>
+		<style>
+			.subcat{    background: #282828;
+			padding: 2px 10px;
+			font-size: 14px;
+			font-weight: bold; border-bottom:2px solid #1a1a1a;
+			text-transform: uppercase;}
+			.itemMenu li {
+			display: inline;
+			font-size: 14px;
+			
+			}
+		</style>
+		<div class="nav-container visible-lg visible-md">
+            <div id="pt_custommenu" class="pt_custommenu"> 
+				<!-- <div class="container"> -->
+				<div id="pt_menu_home" class="pt_menu">
+					<div class="parentMenu"><a href="index.php?route=common/home"><span>Home</span></a></div>
+				</div>
+				{% for category in categories %}
+				{% if category.children %}
+				<div id="pt_menu20" class="pt_menu nav-1">
+					<div class="parentMenu"> 
+					<a href="{{ category.href }}" ><span>{{ category.name }}</span> </a> </div>
+					<div id="popup20" class="popup" style="display: none; width: 1228px;">
+						<div class="inner-popup">
+							<div class="block1" id="block120"> 
+								{% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %} 
+								<div class="column first col1">
+									<div class="itemMenu level1"> 
+										<div class="itemSubMenu level1">
+											<div class="itemMenu level1"> <ul>
+												{% for child in children %}
+												{% if (child.name == "Organic") or (child.name == "Natural") %}
+												<li><a class="subcat" href="{{ child.href }}">{{ child.name }}</a> 
+													{% else %}	 
+													<li><a href="{{ child.href }}" class="subcat" >{{ child.name }}</a> 
+														{% endif %}
+														<ul style="pading:10px";>
+															{% for child_3 in child.children_3 %}
+															<li><a href="{{ child_3.href }}">&bull;&nbsp;{{ child_3.name }}</a></li>				
+															{% endfor %}
+														</ul> 
+													</li>
+													{% endfor %}
+												</ul>
+											</div>
+											</div>
+										</div>
+									</div>
+									{% endfor %}  
+									<div class="clearBoth"></div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					
+					{% else %}	 
+					<div  class="pt_menu">
+						<div class="parentMenu"><a href="{{ category.href }}" ><span>{{ category.name }}</span> </a> </div>
+					</div>
+					
+					
+					{% endif %}
+					{% endfor %}   
+					
+					<div id="pt_menu_offer" class="pt_menu">
+						<div class="parentMenu"><a href="index.php?route=product/special"><span>Special Offer</span></a></div>
+					</div>
+					
+					<!--  <div id ="pt_menu_cms" class ="pt_menu">
+						<div class="parentMenu" ><a href="index.php?route=information/information&amp;information_id=4"><span>About Us</span></a></div>
+						</div>
+						<div id ="pt_menu_cms" class ="pt_menu">
+						<div class="parentMenu" ><a href="index.php?route=information/information&amp;information_id=3"><span>Privacy Policy</span></a></div>
+					</div>   -->
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div id="sticky-menu" data-sticky="1"></div>
+	<script type="text/javascript">
+		//<![CDATA[
+		var body_class = $('body').attr('class'); 
+		if(body_class.search('common-home') != -1) {
+			$('#pt_menu_home').addClass('act');
+		}	
+		var CUSTOMMENU_POPUP_EFFECT =0
+		var CUSTOMMENU_POPUP_TOP_OFFSET = 70
+		//]]>
+	</script> 
+</div>
+<!--
+	<div class="container">
+	<nav id="menu" class="navbar">
+    <div class="navbar-header"><span id="category" class="visible-xs">{{ text_category }}</span>
+	<button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+	<ul class="nav navbar-nav">
+	{% for category in categories %}
+	{% if category.children %}
+	<li class="dropdown"><a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
+	<div class="dropdown-menu">
+	<div class="dropdown-inner"> {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+	<ul class="list-unstyled">
+	{% for child in children %}
+	<li><a href="{{ child.href }}">{{ child.name }}</a></li>
+	{% endfor %}
+	</ul>
+	{% endfor %}</div>
+	<a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a> </div>
+	</li>
+	{% else %}
+	<li><a href="{{ category.href }}">{{ category.name }}</a></li>
+	{% endif %}
+	{% endfor %}
+	</ul>
+    </div>
+	</nav>
+</div> -->
+{% endif %} 

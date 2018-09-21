@@ -1,0 +1,9 @@
+[23-Feb-2018 15:54:17 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:54:59 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:55:23 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:55:41 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:56:19 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:56:26 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:57:39 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:57:46 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434
+[23-Feb-2018 15:58:29 UTC] PHP Fatal error:  Call to a member function isLogged() on a non-object in /home/weguarantee/public_html/new/system/library/template/Twig/Extension/DTwigManager.php on line 434

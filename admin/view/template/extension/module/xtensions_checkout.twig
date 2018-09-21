@@ -1,0 +1,1363 @@
+{{ header }}{{ column_left }} 
+<div id="content">
+<div class="page-header">
+    <div class="container-fluid">
+       <div class="pull-right">
+        <button type="submit" form="form-xcheckout" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i> {{ text_save_and_stay }}</button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i> {{ text_cancel_or_back }}</a>
+        </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %} 
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %} 
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+   <div class="panel panel-default">
+      <div class="panel-heading">
+      <div class="row">
+      <h3 class="panel-title col-sm-12">
+      <span class="col-sm-10 "><i class="fa fa-pencil"></i> {{ edit_heading }}: {{ heading_title }} <b>{{ text_version~xtensions_version }}</b></span>
+      <span class="col-sm-2 text-right">
+	  <select name="store_id" class="form-control">
+	  <option value="0" {{ store_id == 0?'selected="selected"':'' }}>{{ default_heading }}</option>
+	  {% for store in stores %} 
+	  <option value="{{ store.store_id }}" {{ store_id == store.store_id?'selected="selected"':'' }}>{{ store.name }}</option>
+	  {% endfor %} 
+	  </select>
+	  </span>
+      </h3>
+      </div>
+      <div class="clearfix"></div>
+      </div>   
+    <div class="panel-body">
+    <ul class="nav nav-tabs tab-horizontal">         
+		<li class="active"><a href="#tab-module" data-toggle="tab">{{ tab_module_settings }}</a></li>
+		<li><a href="#tab-export-import" data-toggle="tab">{{ tab_export_import }}</a></li>
+		<li><a href="#tab-support-license" data-toggle="tab">{{ help_heading }}</a></li>
+	</ul>
+	<div class="tab-content">
+	<div id="tab-module" class="tab-pane active">
+      <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-xcheckout">        
+   {% if error_warning %} 
+    	<div class="alert alert-warning"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}<button type="button" class="close" data-dismiss="alert">&times;</button></div>
+   {% endif %}     
+   {% if success %} 
+    	<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}<button type="button" class="close" data-dismiss="alert">&times;</button></div>
+   {% endif %}
+{% if config_license['module_xtensions_checkout_activation_code'] is not defined  %}
+<div class="row xtensionsalertmain">
+<div class="col-sm-12">
+<div class="alert alert-danger">{{ text_license_alert_2 }}<span style="margin-left:20px"><a onclick="$('.nav-tabs a[href=#tab-support-license]').tab('show');$('.nav-tabs a[href=#tab-license]').tab('show');" class="btn btn-success">{{ text_license_activate }}</a></span><button type="button" class="close" data-dismiss="alert">&times;</button></div>
+</div>
+</div>
+{% endif %}
+<div class="alert alert-xinfo inline">
+<div class="row">
+<div class="col-sm-5">
+<label>
+<b>{{ module_heading_title }}</b> 
+</label>
+<div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-status_yes" value="1"  name="status" {% if ((xconfig.status is defined and xconfig.status)) %} {{ 'checked' }}{% endif %} />
+				<label for="option-status_yes">{{ yes_option }}</label>
+				<input type="radio" id="option-status_no" value="0"  name="status" {% if (xconfig.status is not defined or (xconfig.status is defined and not xconfig.status)) %} {{ 'checked' }}{% endif %} />
+				<label for="option-status_no">{{ no_option }}</label>
+				</div>
+</div>	
+</div>
+<div class="col-sm-3">
+<label>
+<b class="inline30">{{ default_country_heading }}</b>
+<select class="inline60 form-control" name="options[country_id]">
+                  <option value="0">{{ select_option_heading }}</option>
+                    {% for country in countries %} 
+                    {% if  xconfig.options.country_id is defined and xconfig.options.country_id == country.country_id %} 
+                    <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                    {% else %} 
+                    <option value="{{ country.country_id }}">{{ country.name }}</option>
+                    {% endif %} 
+                    {% endfor %} 
+              </select>
+</label>
+</div>
+<div class="col-sm-4">
+<label>
+<b class="inline50">{{ default_default_state_region }}</b>
+<select class="inline50 form-control" name="options[zone_id]"></select>
+</label>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-3">
+<nav id="login-tabs" class="nav-sidebar">
+<ul class="nav nav-tabs tabs-left" id="tab-xcheckout"> 
+<li class="active"><a href="#tab-fields" data-toggle="tab">{{ text_fields_heading }}</a></li>
+<li><a href="#tab-sort-validation" data-toggle="tab">{{ text_sort_validation }}</a></li>
+<li><a href="#tab-language" data-toggle="tab">{{ language_heading }}</a></li>
+<li><a href="#tab-misc" data-toggle="tab">{{ checkout_misc_heading }}</a></li>
+<li><a href="#tab-social" data-toggle="tab">{{ social_login_heading }}</a></li>
+<li><a href="#tab-override" data-toggle="tab">{{ design_heading }}</a></li>
+</ul>
+</nav>                       
+</div>
+<div class="col-sm-9">
+<div class="tab-content"> 
+<div id="tab-fields" class="tab-pane active">  
+<ul class="nav nav-tabs tab-horizontal">         
+<li class="active"><a href="#tab-reg" data-toggle="tab">{{ register_area_heading }}</a></li>
+<li><a href="#tab-edit" data-toggle="tab">{{ edit_area_heading }}</a></li>
+<li><a href="#tab-checkout" data-toggle="tab">{{ guest_area_heading }}</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab-reg" class="tab-pane active">
+<div class="row">
+<div class="col-md-12">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td colspan="3" class="text-left">{{ register_page_field_heading }}</td>           
+            </tr>
+          </thead>
+               <tr>
+                  <td class="text-left">
+                   <span data-toggle="tooltip" title="(Account, Address, password will appear in single section)"> {{ single_section_heading }}</span>
+                  </td>                  
+                  <td colspan="2" class="text-center"> 
+                  <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-single_box_yes" value="1"  name="options[single_box]" {% if xconfig.options.single_box is not defined or (xconfig.options.single_box is defined and xconfig.options.single_box) %} {{ 'checked' }}{% endif %} />
+				<label for="option-single_box_yes">{{ yes_option }}</label>
+				<input type="radio" id="option-single_box_no" value="0"  name="options[single_box]" {% if xconfig.options.single_box is defined and not xconfig.options.single_box %} {{ 'checked' }}{% endif %} />
+				<label for="option-single_box_no">{{ no_option }}</label>
+				</div>
+  				</div>	
+  				
+  				</td>                             
+               </tr>
+               <thead >            
+            <tr >
+            <td></td>
+               <td class="text-center" width="20%">{{ show_title }}</td>
+              <td class="text-center" width="20%">{{ required_title }}</td>
+              </tr> 
+              </thead>      
+               {% for key,field in fields %} 
+               {% if (field.register or (field.mandatory is defined and field.mandatory)) %} 
+		          <tr>
+					<td class="text-left">
+					{{ field.title is defined?'<span data-toggle="tooltip" title="'~field.title~'">':'' }}{{ field_title[key] }}{{ field.title is defined?'</span>':'' }}</td>
+					<td class="text-center">
+					{% if (field.mandatory is defined and field.mandatory) %} 
+						{% if (key == 'customer_group_id') %} 
+						{{ always_displayed_in_store }} 
+						{% else %} 
+						{{ always_displayed }} 
+						{% endif %} 
+					{% elseif (field.register and field.mandataory is not defined) %}                  
+		            <input type="checkbox" value ="1" name="register[{{ key }}][show]" {{ xconfig.register[key].show is defined?'checked="checked"':'' }} />
+		            {% endif %} 
+		            </td>
+		            <td class="text-center">
+		            {% if (field.required_default is defined and field.required_default) %} 
+		            {{ always_mandatory_heading }} 
+		            {% elseif (field.required is defined and not field.required) %} 
+		            {{ cannot_mandatory_heading }} 
+		            {% else %} 
+		            <input type="checkbox" value="1"  name="register[{{ key }}][required]" {{ xconfig.register[key].required is defined?'checked="checked"':'' }} {{ not field.required?'disabled="disabled"':'' }} />
+		            {% endif %} 
+		            </td>          
+				  </tr>
+				{% endif %} 
+          	  {% endfor %} 
+              
+</table>
+</div>
+</div>
+</div> 
+</div>
+<div id="tab-edit" class="tab-pane">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left">{{ personal_details_account_heading }}</td>              
+              <td class="text-center" width="20%">{{ show_title }}</td>
+              <td class="text-center" width="20%">{{ required_title }}</td>                            
+            </tr>
+          </thead>
+               {% for key,field in fields %} 
+               {% if ( (field.edit and field.location in ['account','both']) or (field.edit and field.mandatory is defined and field.mandatory)) %}
+		          <tr>
+					<td class="text-left">{{ field.title is defined?'<span data-toggle="tooltip" title="'~field.title~'">':'' }}{{ field_title[key] }}{{ field.title is defined?'</span>':'' }}</td>                  
+		            <td class="text-center">
+		            {% if (field.mandatory is defined and field.mandatory ) %} 
+		            	{{ always_displayed }} 
+		            {% elseif (field.edit and field.mandataory is not defined) %} 
+		            <input type="checkbox" value ="1" name="edit[account][{{ key }}][show]" {{ xconfig.edit.account[key].show is defined?'checked="checked"':'' }}  /> 
+		            {% endif %} 
+		            </td>
+		            <td class="text-center">
+		            {% if (field.required_default is defined and field.required_default) %} 
+		            {{ always_mandatory_heading }} 
+		            {% elseif (field.required is defined and not field.required) %} 
+		            {{ cannot_mandatory_heading }} 
+		            {% else %} 
+		            <input type="checkbox" value="1"  name="edit[account][{{ key }}][required]" {{ not field.required?'disabled="disabled"':'' }} {{ xconfig.edit.account[key].required is defined?'checked="checked"':'' }} />
+		            {% endif %} 
+		            </td>            
+				  </tr>
+				{% endif %} 
+          	  {% endfor %} 
+</table>
+</div> 
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left">{{ personal_details_address_heading }}</td>              
+              <td class="text-center" width="20%">{{ show_title }}</td>
+              <td class="text-center" width="20%">{{ required_title }}</td>                            
+            </tr>
+          </thead>
+               {% for key,field in fields %} 
+               {% if (field.edit and field.location in ['address','both'] ) %}
+		          <tr>
+					<td class="text-left">{{ field.title is defined?'<span data-toggle="tooltip" title="'~field.title~'">':'' }} {{ field_title[key] }}{{ field.title is defined?'</span>':'' }}</td>                  
+		            <td class="text-center"><input type="checkbox" value ="1" name="edit[address][{{ key }}][show]" {{ xconfig.edit.address[key].show is defined?'checked="checked"':'' }} /></td>
+		            <td class="text-center">
+		            {% if (field.required_default is defined and field.required_default) %} 
+		            {{ always_mandatory_heading }} 
+		            {% elseif (field.required is defined and not field.required) %} 
+		            {{ cannot_mandatory_heading }} 
+		            {% else %} 
+		            <input type="checkbox" value="1"  name="edit[address][{{ key }}][required]" {{ not field.required?'disabled="disabled"':'' }} {{ xconfig.edit.address[key].required is defined?'checked="checked"':'' }} />
+		            {% endif %} 
+		            </td>            
+				  </tr>
+				{% endif %} 
+          	  {% endfor %} 
+</table>
+</div>           
+</div>                                  
+<div id="tab-checkout" class="tab-pane">
+<div class="table-responsive"><table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" width="60%">{{ account_guest_heading }}</td>              
+              <td class="text-center" width="20%">{{ show_title }}</td>
+              <td class="text-center" width="20%">{{ required_title }}</td>                            
+            </tr>
+          </thead>
+               {% for key,field in fields %} 
+               {% if ((field.checkout and field.location in ['account','both']) or (field.checkout and field.mandatory is defined and field.mandatory) ) %}
+		          <tr>
+					<td class="text-left">
+					{{ field.title is defined?'<span data-toggle="tooltip" title="'~field.title~'">':'' }}{{ field_title[key] }}{{ field.title is defined?'</span>':'' }} 
+					{% if (field.guest is defined and not field.guest) %} 
+					<br /><small class="text-muted">{{ guest_area_subheading }}</small>
+					{% endif %} 
+					</td>                  
+		            <td class="text-center">
+		            {% if (field.mandatory is defined and field.mandatory ) %} 
+		            	{% if (key == 'customer_group_id') %} 
+						{{ always_displayed_in_store }} 
+						{% else %} 
+						{{ always_displayed }} 
+						{% endif %} 
+		            {% elseif (field.checkout and field.mandataory is not defined) %} 
+		            <input type="checkbox" value ="1" name="checkout[account][{{ key }}][show]" {{ xconfig.checkout.account[key].show is defined?'checked="checked"':'' }}  /> 
+		            {% endif %}		            
+		            </td>
+		            <td class="text-center">
+		            {% if (field.required_default is defined and field.required_default) %} 
+		            {{ always_mandatory_heading }} 
+		            {% elseif (field.required is defined and not field.required) %} 
+		            {{ cannot_mandatory_heading }} 
+		            {% else %} 
+		            <input type="checkbox" value="1"  name="checkout[account][{{ key }}][required]" {{ not field.required?'disabled="disabled"':'' }} {{ xconfig.checkout.account[key].required is defined?'checked="checked"':'' }} />
+		            {% endif %} 
+		            </td>            
+				  </tr>
+				{% endif %} 
+          	  {% endfor %} 
+</table>  
+</div>  
+<div class="table-responsive"><table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" width="60%">{{ address_panel_heading }}</td>              
+              <td class="text-center" width="20%">{{ show_title }}</td>
+              <td class="text-center" width="20%">{{ required_title }}</td>                           
+            </tr>
+          </thead>
+               {% for key,field in fields %} 
+               {% if (field.checkout and field.location in ['address','both']) %}               
+		          <tr>
+					<td class="text-left">{{ field.title is defined?'<span data-toggle="tooltip" title="'~field.title~'">':'' }}{{ field_title[key] }}{{ field.title is defined?'</span>':'' }}</td>                
+		            <td class="text-center"><input type="checkbox" value ="1" name="checkout[address][{{ key }}][show]" {{ xconfig.checkout.address[key].show is defined?'checked="checked"':'' }} /></td>
+		            <td class="text-center">
+		            {% if (field.required_default is defined and field.required_default) %} 
+		            {{ always_mandatory_heading }} 
+		            {% elseif (field.required is defined and not field.required) %} 
+		            {{ cannot_mandatory_heading }} 
+		            {% else %} 
+		            <input type="checkbox" value="1"  name="checkout[address][{{ key }}][required]" {{ xconfig.checkout.address[key].required is defined?'checked="checked"':'' }} />
+		            {% endif %}        
+		            </td>  
+				  </tr>
+				{% endif %} 
+          	  {% endfor %} 
+</table>  
+</div>           
+</div>
+</div>
+</div>
+<div id="tab-sort-validation" class="tab-pane">
+<ul class="nav nav-tabs tab-horizontal">         
+<li class="active"><a href="#tab-sort" data-toggle="tab">{{ sorting_heading }}</a></li>
+<li><a href="#tab-validation" data-toggle="tab">{{ validation_heading }}</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab-sort" class="tab-pane active">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" width="30%">{{ field_name_heading }}</td>              
+              <td class="text-left" width="70%">{{ sort_name_heading }}</td>                                          
+            </tr>
+          </thead>
+          {% for key,field in fields %} 
+          {% if (key not in ['newsletter','agree']) %}                   
+           <tr>
+            <td class="text-left">{{ field_title[key] }}</td>                  
+        	<td class="text-left"><input type="text" name="sort_order[fields][{{ key }}]" value="{{ xconfig.sort_order.fields[key] is defined ? xconfig.sort_order.fields[key] : field.sort_order is defined ? field.sort_order : '' }}" size="6"  class="form-control"/></td>        	
+           </tr>
+           {% endif %} 
+        {% endfor %} 
+        {% if (custom_fields|length > 0) %}
+        {% set count_custom_fields = 1 %} 
+        {% for field in custom_fields %} 
+          <tr>
+          <td class="text-left">{{ field.name }} - {{ custom_field_heading }} (<span style="text-transform: capitalize;">{{ field.location }}</span>)</td>                  
+          <td class="text-left"><input type="text" name="sort_order[custom_fields][{{ field.custom_field_id }}]" value="{{ xconfig.sort_order.custom_fields[field.custom_field_id] is defined ? xconfig.sort_order.custom_fields[field.custom_field_id] : count_custom_fields*5 }}" size="6"  class="form-control"/></td>
+          </tr>
+          {% set count_custom_fields = count_custom_fields + 1 %} 
+          {% endfor %} 
+          {% endif %} 
+</table> 
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" width="30%">{{ account_tab_heading }}</td>              
+              <td class="text-left" width="70%">{{ sort_number_heading }}</td>                                          
+            </tr>
+          </thead>
+          {% for key,value in {'login':1,'register':2,'guest':3} %}                 
+           <tr>
+            <td class="text-left"><span style="text-transform: capitalize;">{{ key }}</span></td>                  
+        	<td class="text-left"><input type="text" name="sort_order[account][{{ key }}]" value="{{ xconfig['sort_order']['account'][key] is defined?xconfig['sort_order']['account'][key]:value }}" size="6"  class="form-control"/></td>        	
+           </tr>
+           {% endfor %}
+</table>           
+</div>
+</div>
+<div id="tab-validation" class="tab-pane">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" width="20%">{{ validation_heading }}</td>           
+              <td class="text-center" width="10%">{{ minimum_characters_heading }}</td>
+              <td class="text-center" width="10%">{{ maximum_characters_heading }}</td>              
+              <td class="text-center" width="10%">{{ numeric_heading }}</td>     
+              <td class="text-center" width="25%">{{ masking_heading }}</td> 
+              <td class="text-center" width="25%">{{ regex_heading }}</td>
+            </tr>            
+          </thead>  
+          {% for key, field in fields %}
+           {% if  field.minimum  or  field.maximum%}                     
+           <tr>
+            <td class="text-left"><b>{{ field_title[key] }}</b></td>            
+            {% if  key  == 'confirm' %}
+            <td class="text-center" colspan="2">{{ confirm_password_description }}</td>
+            {% else %}
+        	<td class="text-center"><input type="text" size="6" name="validation[{{ key }}][minimum]" value="{{ xconfig['validation'][key]['minimum'] ? xconfig['validation'][key]['minimum'] : field.minimum_default ? field.minimum_default: '' }}" class="form-control"/></td>
+        	<td class="text-center"><input type="text" size="6" name="validation[{{ key }}][maximim]" value="{{ xconfig['validation'][key]['maximim'] ? xconfig['validation'][key]['maximim'] : field.maximum_default ? field.maximum_default: '' }}" class="form-control"/></td>
+        	{% endif %}
+        	{% if  field.is_numeric  or  field.is_masking %}            
+        	<td class="text-center"><input type="checkbox" value="1" name="validation[{{ key }}][numeric]" {{ xconfig['validation'][key]['numeric']?'checked="checked"': '' }}/></td>
+        	<td class="text-center"><input type="text" name="validation[{{ key }}][mask]" value="{{ xconfig['validation'][key]['mask']?xconfig['validation'][key]['mask']:'' }}" placeholder="Masking" title="CEP Brasil-99999-999" class="form-control"/></td>           
+            {% else %}
+            <td colspan="2" class="text-center"><i class="fa fa-times-circle" aria-hidden="true"></i></td>
+            {% endif %}			
+            {% if  field.regex %}
+        	<td class="text-center"><input type="text" name="validation[{{ key }}][regex]" value="{{ xconfig['validation'][key]['regex']?xconfig['validation'][key]['regex']: '' }}" placeholder="Regex" class="form-control"/></td>           
+            {% else %}
+            <td colspan="1" class="text-center"><i class="fa fa-times-circle" aria-hidden="true"></i></td>
+            {% endif %}                	
+           	</tr>  
+           {% endif %}
+           {% endfor %}     
+
+                  
+</table> 
+</div>           
+</div>
+</div>
+</div>
+<div id="tab-language" class="tab-pane">
+<div class="table-responsive"><table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" width="10%">{{ field_heading }}</td>
+              <td class="text-center" width="20%">{{ title_heading }}</td>  
+              <td class="text-center" width="40%">{{ error_message_heading }}</td>            
+              <td class="text-center" width="30%">{{ tooltip_heading }}</td>                  
+            </tr>            
+          </thead>
+          {% for key, field in fields %}                                
+           <tr>
+            <td class="text-left">{{ field_title[key] }}</td>           
+        	<td class="text-center">
+        	{% for language in languages %} 
+        	<div class="input-group">
+        	<span data-toggle="tooltip" title="{{ language.name }}" class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+        	<input type="text" name="titles[{{ key }}][title][{{ language.language_id }}]" value="{{ xconfig['titles'][key]['title'][language['language_id']]?xconfig['titles'][key]['title'][language['language_id']]:'' }}"   class="form-control" />                  
+        	</div>
+        	{% endfor %}        	
+        	</td>
+        	<td class="text-center">
+            {% for language in languages %} 
+        	<div class="input-group">
+        	<span data-toggle="tooltip" title="{{ language.name }}" class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+        	<input type="text" name="validation[{{ key }}][message][{{ language.language_id }}]" value="{{ xconfig['validation'][key]['message'][language['language_id']]?xconfig['validation'][key]['message'][language['language_id']]:'' }}"   class="form-control" />                  
+        	</div>
+        	{% endfor %}
+        	</td>  
+        	<td class="text-center">
+        	{% for language in languages %} 
+        	<div class="input-group">
+        	<span data-toggle="tooltip" title="{{ language.name }}" class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+        	<input type="text" name="titles[{{ key }}][tooltip][{{ language.language_id }}]" value="{{ xconfig['titles'][key]['tooltip'][language['language_id']]?xconfig['titles'][key]['tooltip'][language['language_id']]:'' }}"   class="form-control" />                  
+        	</div>
+        	{% endfor %}
+        	</td>
+           </tr>
+        {% endfor %}            
+</table> 
+</div>           
+</div>
+<div id="tab-misc" class="tab-pane">
+<ul class="nav nav-tabs tab-horizontal">         
+<li class="active"><a href="#tab-sub-misc" data-toggle="tab">{{ checkout_misc_heading }}</a></li>
+<li><a href="#tab-footer" data-toggle="tab">Footer</a></li>
+<li><a href="#tab-payment" data-toggle="tab">Payment Methods</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab-sub-misc" class="tab-pane active">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" style="width:40%;">{{ field_heading }}</td>              
+              <td class="text-left" style="width:60%;">{{ option_heading }}</td>                                          
+            </tr>
+          </thead>  
+          	  <tr><td class="text-left" >{{ newsletter_default }}</td>              
+		      <td class="text-left">
+		      <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-newsletter_default-checked" value="checked"  name="options[newsletter_default]" {% if   xconfig.options.newsletter_default  and  xconfig.options.newsletter_default  == 'checked' %} {{ 'checked' }} {% endif %}  />
+				<label for="option-newsletter_default-checked"><i class="fa fa-check-square-o" aria-hidden="true"></i> {{ text_selected }}</label>
+				<input type="radio" id="option-newsletter_default-unchecked" value="unchecked"  name="options[newsletter_default]" {% if   not xconfig.options.newsletter_default  or  xconfig.options.newsletter_default  and  xconfig.options.newsletter_default  == 'unchecked'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-newsletter_default-unchecked"><i class="fa fa-square-o" aria-hidden="true"></i> {{ text_unselected }}</label>
+				</div>
+  				</div>
+		      </td>
+        	   </tr>             
+              <tr>
+              <td class="text-left" >{{ payment_shipping_method_heading }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="options[display_comments]" {{ xconfig.options.display_comments?"checked":'' }} />
+        	  </td>
+              </tr>            
+              <tr>                          
+              <td class="text-left">{{ show_coupons }}</td>              
+        	  <td class="text-left">
+        	  <input type="checkbox" value="1"  name="options[display_coupons]" {{ xconfig.options.display_coupons?"checked":'' }} />
+              </tr>
+              <tr>                          
+              <td class="text-left" >{{ show_vouchers }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="options[display_vouchers]" {{ xconfig.options.display_vouchers?"checked":'' }} />
+        	  </td>
+              </tr>
+              <tr>                          
+              <td class="text-left" >{{ show_reward_points }}<br /><small class="help">{{ required_user_subheading }}</small></td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="options[display_rewards]" {{ xconfig.options.display_rewards?"checked":'' }} />
+        	  </td>
+              </tr>
+              <tr>
+              <td class="text-left" >{{ same_address_heading }}<br /><small class="help">{{ same_address_heading_help }}</small></td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="options[same_shipping]" {{ xconfig.options.same_shipping?"checked":'' }} />           
+              </tr>  
+              <tr>
+              <td class="text-left" >{{ default_same_address }}<br /><small class="help">{{ default_same_address_help }}</small></td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="options[default_same_address]" {{ xconfig.options.default_same_address?"checked":'' }} />           
+              </tr>  
+              <tr>
+              <td class="text-left" >{{ login_page_heading }}<br/><span class="help">{{ change_login_step_heading }}</span></td>              
+		      <td class="text-left">
+		      <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-login-clean" value="clean"  name="options[login_type]" {% if   not xconfig.options.login_type  or  xconfig.options.login_type  and  xconfig.options.login_type  == 'clean' %} {{ 'checked' }} {% endif %} />
+				<label for="option-login-clean"><i class="fa fa-tablet" aria-hidden="true"></i> {{ clean_view }}</label>
+				<input type="radio" id="option-login-tab" value="tabs"  name="options[login_type]" {% if   xconfig.options.login_type  and  xconfig.options.login_type  == 'tabs' %} {{ 'checked' }} {% endif %}/>
+				<label for="option-login-tab"><i class="fa fa-th-list" aria-hidden="true"></i> {{ tabs_view }}</label>
+				</div>
+  				</div>
+		      </td>
+        	   </tr>             
+              <tr>
+              <td class="text-left" >{{ address_list_heading }}<br/><span class="help">{{ address_list_subheading }}</span></td>              
+		      <td class="text-left">
+		      <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-address-block" value="block"  name="options[address_type]" {% if not xconfig.options.address_type  or  xconfig.options.address_type  and  xconfig.options.address_type  == 'block' %} {{ 'checked' }} {% endif %} />
+				<label for="option-address-block"><i class="fa fa-th" aria-hidden="true"></i> {{ block_view_heading }}</label>
+				<input type="radio" id="option-address-list" value="list"  name="options[address_type]" {% if xconfig.options.address_type  and  xconfig.options.address_type  == 'list' %} {{ 'checked' }} {% endif %}  />
+				<label for="option-address-list"><i class="fa fa-align-justify" aria-hidden="true"></i> {{ list_view_heading }}</label>
+				</div>
+  				</div>
+		      </td>
+        	   </tr> 
+        	   <tr>
+              <td class="text-left" >{{ address_form_heading }}<br/><span class="help"> {{ address_form_subheading }}</span></td>              
+		      <td class="text-left">
+		      <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-address-form-list" value="modal"  name="options[address_form]" {% if   xconfig.options.address_form  and  xconfig.options.address_form  == 'modal' %} {{ 'checked' }} {% endif %}  />
+				<label for="option-address-form-list"><i class="fa fa-clone" aria-hidden="true"></i> {{ modal_view_heading }}</label>
+				<input type="radio" id="option-address-form-block" value="inline"  name="options[address_form]" {% if   not xconfig.options.address_form  or  xconfig.options.address_form  and  xconfig.options.address_form  == 'inline'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-address-form-block"><i class="fa fa-list-alt" aria-hidden="true"></i> {{ page_view_heading }}</label>
+				</div>
+  				</div>
+		      </td>
+        	   </tr>
+        	   <tr>
+              <td class="text-left" >{{ other_option_heading }}</td>              
+		      <td class="text-left">
+		      <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-coupon-form-modal" value="modal"  name="options[xcvc_view]" {% if   not xconfig.options.xcvc_view  or  xconfig.options.xcvc_view  and  xconfig.options.xcvc_view  == 'modal'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-coupon-form-modal"><i class="fa fa-clone" aria-hidden="true"></i> {{ modal_view_heading }}</label>
+				<input type="radio" id="option-coupon-form-inline" value="inline"  name="options[xcvc_view]" {% if   xconfig.options.xcvc_view  and  xconfig.options.xcvc_view  == 'inline'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-coupon-form-inline"><i class="fa fa-list-alt" aria-hidden="true"></i> {{ inline_view_heading }}</label>
+				</div>
+  				</div>
+		      </td>
+        	   </tr>
+        	   <tr>
+              <td class="text-left" >{{ default_step_heading }}<br/><span class="help">{{ step_active_heading }}</span></td>              
+		      <td class="text-left">
+		      <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-step-default-login" value="login"  name="options[step_default]" {% if   not xconfig.options.step_default  or  xconfig.options.step_default  and  xconfig.options.step_default  == 'login'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-step-default-login"><i class="fa fa-user" aria-hidden="true"></i> {{ login_heading }}</label>
+				<input type="radio" id="option-step-default-register" value="register"  name="options[step_default]" {% if   xconfig.options.step_default  and  xconfig.options.step_default  == 'register'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-step-default-register"><i class="fa fa-user-plus" aria-hidden="true"></i> {{ register_heading }}</label>
+				<input type="radio" id="option-step-default-guest" value="guest"  name="options[step_default]" {% if   xconfig.options.step_default  and  xconfig.options.step_default  == 'guest'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-step-default-guest"><i class="fa fa-user-secret" aria-hidden="true"></i> {{ guest_heading }}</label>
+				</div>
+  				</div>
+		      </td>
+        	   </tr>
+        	   <tr>
+              <td class="text-left" >{{ default_step_session_heading }}<br/><span class="help">{{ default_step_session_heading_help }}</span></td>              
+		      <td class="text-left">
+		      <input type="checkbox" value="1"  name="options[step_default_use_session]" {% if xconfig.options.step_default_use_session is defined  %} {{ 'checked' }} {% endif %} />
+		      </td>
+        	   </tr> 
+               <tr>
+               <tr>
+               <td class="text-left" >{{ payment_type_heading_laptop }}<br/><span class="help">{{ payment_type_subheading_laptop }}</span></td>              
+		        <td class="text-left">
+		        <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-payment-tabs" value="tabs"  name="options[payment_type]" {% if   not xconfig.options.payment_type  or  xconfig.options.payment_type  and  xconfig.options.payment_type  == 'tabs'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-payment-tabs"><i class="fa fa-th-list" aria-hidden="true"></i> {{ tabs_view }}</label>
+				<input type="radio" id="option-payment-accordion" value="accordion"  name="options[payment_type]" {% if   xconfig.options.payment_type  and  xconfig.options.payment_type  == 'accordion' %} {{ 'checked' }} {% endif %} />
+				<label for="option-payment-accordion"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> {{ accordion_view }}</label>
+				</div>
+  				</div>		         
+		        </td>    
+		        </tr>
+		        <tr>
+                <td class="text-left" >{{ payment_type_heading_mobile }}<br/><span class="help">{{ payment_type_subheading_mobile }}</span></td>              
+		        <td class="text-left">
+		        <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-payment-tabs_mobile" value="tabs"  name="options[payment_type_mobile]" {% if   not xconfig.options.payment_type_mobile  or  xconfig.options.payment_type_mobile  and  xconfig.options.payment_type_mobile  == 'tabs'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-payment-tabs_mobile"><i class="fa fa-th-list" aria-hidden="true"></i> {{ tabs_view }}</label>
+				<input type="radio" id="option-payment-accordion_mobile" value="accordion"  name="options[payment_type_mobile]" {% if   xconfig.options.payment_type_mobile  and  xconfig.options.payment_type_mobile  == 'accordion' %} {{ 'checked' }} {% endif %} />
+				<label for="option-payment-accordion_mobile"><i class="fa fa-dot-circle-o" aria-hidden="true"></i> {{ accordion_view }}</label>
+				</div>
+  				</div>		         
+		        </td>    
+		        </tr>
+		        <tr id="image-row-gift_wrap_image>">
+                    <td class="text-left">{{ gift_wrap_image }}</td> 
+                    <td class="text-left">
+                      <a href="" id="thumb-image_gift_wrap_image" data-toggle="image" class="img-thumbnail"><img width="100px" src="{{ xconfig.options.gift_wrap_image  and  xconfig.options.gift_wrap_image?'../image/'~xconfig.options.gift_wrap_image: '../image/catalog/xtensions/giftcard.jpg' }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                      <input type="hidden" name="options[gift_wrap_image]" value="{{ xconfig.options.gift_wrap_image?xconfig.options.gift_wrap_image: '../image/catalog/xtensions/giftcard.jpg' }}" id="input-image-gift_wrap_image" />
+                    </td>
+                    </tr> 
+		        <tr>
+              <td class="text-left" >{{ override_heading }}<br/><span class="help">{{ override_subheading }}</span></td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="options[override_format]" {{ xconfig.options.override_format?"checked": '' }} />           
+              </tr>                 
+              <tr>
+              <td class="text-left">{{ address_format_heading }}<br/>
+              <span class="help">
+        		{{ firstname_heading }}<br>
+        		{{ lastname_heading }}<br>
+        		{{ company_heading }}<br>
+		        {{ address_1_heading }}<br>
+		        {{ address_2_heading }}<br>
+		        {{ city_heading }}<br>
+		        {{ postcode_heading }}<br>
+		        {{ zone_heading }}<br>
+		        {{ zone_code_heading }}<br>
+		        {{ country_heading }}<br>
+		        <b>{{ identifier_heading }}</b><br>
+		        {{ Applicable_custom_field_heading }}
+		        <br>
+		        <span style="color:red">
+		        {{ address_format_note_text }}        
+		        </span>
+		       </span>
+              </td>
+              <td class="text-left"><textarea name="options[address_format]" autocomplete="off" cols="40" rows="15">{{ xconfig.options.address_format?xconfig.options.address_format: '' }}</textarea></td>
+              </tr>
+              {% if  custom_fields|length > 0 %}
+              <tr>
+              <td class="text-left">{{ custom_fields_for_address_heading}}</td>
+              <td class="text-left">
+              {% for field in custom_fields %}
+              {{ field.location == 'address'?'{'~field.identifier~'}<br/>':'' }}             
+              {% endfor %}
+              </td>
+              </tr>
+              {% endif %} 
+              <tr>
+              <td class="text-left" colspan="2">{{ linear_address_format_heading }}<br/>
+              <input type="text" value="{{ xconfig.options.linear_address_format?xconfig.options.linear_address_format: '' }}" name="options[linear_address_format]" class="form-control">
+              <br /><span class="help">
+        		{{ firstname_heading }}<br>
+        		{{ lastname_heading }}<br>
+        		{{ company_heading }}<br>
+		        {{ address_1_heading }}<br>
+		        {{ address_2_heading }}<br>
+		        {{ city_heading }}<br>
+		        {{ postcode_heading }}<br>
+		        {{ zone_heading }}<br>
+		        {{ zone_code_heading }}<br>
+		        {{ country_heading }}<br>
+		        <b>{{ identifier_heading }}</b><br>
+		        {{ Applicable_custom_field_heading }}
+		       </span>
+		       </td>
+              </tr>
+              {% if  custom_fields|length > 0 %}
+              <tr>
+              <td class="text-left">{{ custom_fields_for_address_heading}}</td>
+              <td class="text-left">
+              {% for field in custom_fields %}
+              {{ field.location == 'address'?'{'~field.identifier~'}<br/>':'' }}             
+              {% endfor %}
+              </td>
+              </tr>
+              {% endif %}                                           
+</table>         
+</div>
+</div>
+<div id="tab-footer" class="tab-pane">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+<thead>            
+            <tr>
+              <td class="left" style="width:40%;">{{ information_page_heading }}</td>              
+              <td class="left" style="width:60%;">{{ display_footer_link_heading }}</td>                                          
+            </tr>
+          </thead>
+          {% for information in informations %}
+          {% if  information.status%}
+          <tr>
+              <td class="left" style="width:40%;">{{ information.title }}</td>              
+              <td class="left" style="width:60%;"><input name="options[information][]" type="checkbox" value="{{ information.information_id }}" {{ xconfig.options.information  and  information.information_id in xconfig.options.information?'checked="checked"': ''}}/></td>                                          
+            </tr>
+         {% endif %}  
+         {% endfor %}
+          <tr>
+              <td class="left" style="width:40%;">{{ display_contact_link }}</td>              
+              <td class="left" style="width:60%;">
+              <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-contact_us_yes" value="1" name="options[footer][contact_us]" {% if xconfig.options.footer.contact_us is not defined   or  xconfig.options.footer.contact_us is defined    and  xconfig.options.footer.contact_us  == '1' %} {{ 'checked' }} {% endif %} />
+				<label for="option-contact_us_yes">{{ yes_option }}</label>
+				<input type="radio" id="option-contact_us_no" value="0" name="options[footer][contact_us]" {% if  xconfig.options.footer.contact_us is defined  and  xconfig.options.footer.contact_us  == '0' %} {{ 'checked' }} {% endif %} />
+				<label for="option-contact_us_no">{{ no_option }}</label>
+				</div>
+  				</div>
+  				</td>                                          
+            </tr>
+            <tr>
+              <td class="left" style="width:40%;">{{ display_footer_modal }}</td>              
+              <td class="left" style="width:60%;">
+              <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-footer_modal" value="1" name="options[footer][link_modal]" {% if  xconfig.options.footer.link_modal is not defined  or  xconfig.options.footer.link_modal is defined  and  xconfig.options.footer.link_modal  == '1' %} {{ 'checked' }} {% endif %} />
+				<label for="option-footer_modal">{{ yes_option }}</label>
+				<input type="radio" id="option-footer_modal_no" value="0" name="options[footer][link_modal]" {% if  xconfig.options.footer.link_modal is defined  and  xconfig.options.footer.link_modal  == '0'  %} {{ 'checked' }} {% endif %} />
+				<label for="option-footer_modal_no">{{ no_option }}</label>
+				</div>
+  				</div>
+  				</td>                                          
+            </tr>
+</table>
+<table class="table table-striped table-bordered table-hover">
+<thead>            
+            <tr>
+              <td class="left" style="width:40%;">{{ information_page_heading }}</td>              
+              <td class="left" style="width:60%;">{{ contact_details_heading }}</td>                                          
+            </tr>
+          </thead>
+          <tr>
+              <td class="left" style="width:40%;">{{ contact_email_heading }}<br /><small class="text-muted">{{ contact_email_subheading }}</small></td>              
+              <td class="left" style="width:60%;"><input name="options[footer][contact_email]" type="text" value="{{ xconfig.options.footer.contact_email?xconfig.options.footer.contact_email : contact_email }}" class="form-control" /></td>                                          
+            </tr>
+            <tr>
+              <td class="left" style="width:40%;">{{ contact_telephone_heading }}<br /><small class="text-muted">{{ contact_telephone_subheading }}</small></td>              
+              <td class="left" style="width:60%;"><input name="options[footer][contact_telephone]" type="text" value="{{ xconfig.options.footer.contact_telephone ? xconfig.options.footer.contact_telephone : contact_telephone }}" class="form-control" /></td>                                          
+            </tr>
+</table>
+<div class="table-responsive">
+                <table id="images" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ footer_image_heading }}</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% set image_row = 0 %} 
+                  {% if  xconfig.options.footer.images is defined %}                    
+                    {% for product_image in xconfig.options.footer.images %}
+                    <tr id="image-row{{ image_row }}">
+                      <td class="text-left"><a href="" id="thumb-image{{ image_row }}" data-toggle="image" class="img-thumbnail"><img width="100" src="../image/{{ product_image }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="options[footer][images][]" value="{{ product_image }}" id="input-image{{ image_row }}" /></td>                      
+                      <td class="text-left"><button type="button" onclick="$('#image-row{{ image_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                    </tr>
+                    {% set image_row = image_row + 1 %}
+                    {% endfor %}
+                    {% endif %}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td></td>
+                      <td class="text-left"><button type="button" onclick="addImage();" data-toggle="tooltip" title="{{ button_image_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+</div>
+</div>
+<div id="tab-payment" class="tab-pane">                            
+<div class="table-responsive">
+                <table id="images" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ payment_method_logo_heading }}</td>
+                      <td>{{ text_payment_default }}</td>
+                      <td></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for payment in payments %}
+                    <tr id="image-row-{{ payment }}">
+                    <td class="text-left">{{ payment }}</td>
+                    <td class="text-left">
+                    <div class="xform">
+			        <div class="radio-group">
+					<input type="radio" id="payment_dedault_{{ payment }}" value="{{ payment }}" name="options[payment][default]" {% if xconfig.options.payment.default is defined and xconfig.options.payment.default == payment %} {{ 'checked' }} {% endif %} />
+					<label for="payment_dedault_{{ payment }}">{{ text_payment_default }}</label>					
+					</div>
+  					</div>
+                    </td> 
+                    <td class="text-left">
+                      <a href="" id="thumb-image{{ payment }}" data-toggle="image" class="img-thumbnail"><img width="60" src="{{ xconfig['options']['payment']['images'][payment] is defined  and  xconfig['options']['payment']['images'][payment]?'../image/'~xconfig['options']['payment']['images'][payment]: placeholder}}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                      <input type="hidden" name="options[payment][images][{{ payment }}]" value="{{ xconfig['options']['payment']['images'][payment]?xconfig['options']['payment']['images'][payment]: ''}}" id="input-image-{{ payment }}" />
+                    </td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>                  
+                </table>
+              </div>
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_payment_method_content }}</h3>
+      </div>
+      <div class="panel-body">
+{% for payment in payments %}
+<div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ payment }}</h3>
+      </div>
+      <div class="panel-body">
+                <ul class="nav nav-tabs tab-horizontal" id="{{ payment }}language">
+                {% set pcount = 0 %}
+                {% for language in languages %}
+                <li{{ not pcount?' class="active"':'' }}><a href="#{{ payment }}language{{ language.language_id }}" data-toggle="tab"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /> {{ language.name }}</a></li>
+                {% set pcount = pcount + 1 %}
+                {% endfor %}
+              </ul>
+              <div class="tab-content">
+              	{% set pcount = 0 %}
+                {% for language in languages %}
+                <div class="tab-pane{{ not pcount?' active': ''}}" id="{{ payment }}language{{ language.language_id }}">                  
+                  <div class="form-group">                    
+                    <div class="col-sm-12">
+                      <textarea name="options[payment][content][{{ payment }}][{{ language.language_id }}]" id="input-description-{{ payment }}-{{ language.language_id }}" class="form-control"  data-toggle="summernote" data-lang="{{ summernote }}" >{{ xconfig['options']['payment']['content'][payment][language['language_id']] ?  xconfig['options']['payment']['content'][payment][language['language_id']] : ''}}</textarea>
+                    </div>
+                  </div>
+                  </div>
+                  {% set pcount = pcount + 1 %}
+                  {% endfor %}
+                  </div>
+</div>
+</div>              
+{% endfor %}           
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="tab-social" class="tab-pane">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" colspan="2"><i class="fa fa-facebook"></i>&nbsp;{{ facebook_heading }}</td>                                          
+            </tr>
+          </thead>               
+              <tr>
+              <td class="text-left" style="width: 30%;">{{ status_heading }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="social[facebook][status]" {{ xconfig.social.facebook.status?"checked": '' }} />
+        	  </td>
+              </tr>
+              <tr>
+              <td class="text-left" >{{ app_id_heading }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="text" name="social[facebook][appId]" value="{{ xconfig.social.facebook.appId?xconfig.social.facebook.appId:'' }}" class="form-control" />
+        	  </td>
+              </tr>                                           
+</table>
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" colspan="2"><i class="fa fa-google"></i>&nbsp;{{ google_heading }}</td>                                          
+            </tr>
+          </thead>               
+              <tr>
+              <td class="text-left" style="width: 30%;">{{ status_heading }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="social[google][status]" {{ xconfig.social.google.status?"checked":'' }} />
+        	  </td>
+              </tr>
+              <tr>
+              <td class="text-left" >{{ client_id_heading }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="text" name="social[google][client_id]" value="{{ xconfig.social.google.client_id?xconfig.social.google.client_id:'' }}" class="form-control"/>
+        	  </td>
+              </tr>                                           
+</table>
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" colspan="2"><i class="fa fa-linkedin"></i>&nbsp;{{ linkedin_heading }}</td>                                          
+            </tr>
+          </thead>               
+              <tr>
+              <td class="text-left" style="width: 30%;">{{ status_heading }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="checkbox" value="1"  name="social[linkedin][status]" {{ xconfig.social.linkedin.status?"checked": '' }} />
+        	  </td>
+              </tr>
+              <tr>
+              <td class="text-left" >{{ api_key }}</td>              
+        	  <td class="text-left"> 
+        	  <input type="text" name="social[linkedin][api_key]" value="{{ xconfig.social.linkedin.api_key?xconfig.social.linkedin.api_key: ''}}" class="form-control" />
+        	  </td>
+              </tr>                                           
+</table>      
+</div>
+<div class="panel panel-default">
+<div class="panel-heading"><h3 class="panel-title">{{ extra_fields_heading }}</h3></div>
+<div class="panel-body">
+<div class="table-responsive additionalfields">
+<table class="table table-striped table-bordered table-hover">
+         
+          <tr>
+               <td class="text-left" >{{ additional_fields_heading }}<br/><span class="help">{{ additional_fields_subheading }}{{ no_option }}{{ additional_fields_subheading_second }}</span></td>              
+		        <td class="text-left">
+		        <div class="xform">
+		        <div class="radio-group">
+				<input type="radio" id="option-social-force-yes" value="yes"  name="social[additional]" {% if   xconfig.social.additional  and  xconfig.social.additional  == 'yes' %} {{ 'checked' }} {% endif %} />
+				<label for="option-social-force-yes" onclick="$('.table-additional').removeClass('hidden');"><i class="fa fa-check" aria-hidden="true"></i> {{ yes_option }}</label>
+				<input type="radio" id="option-social-force-no" value="no"  name="social[additional]" {% if   not xconfig.social.additional  or  xconfig.social.additional  and  xconfig.social.additional  == 'no' %} {{ 'checked' }} {% endif %} />
+				<label for="option-social-force-no" onclick="$('.table-additional').addClass('hidden');"><i class="fa fa-times" aria-hidden="true"></i> {{ no_option }}</label>
+				</div>
+  				</div>		         
+		        </td>    
+		        </tr>
+</table>
+<table class="table table-striped table-bordered table-hover table-additional {% if   not xconfig.social.additional  or  xconfig.social.additional  and  xconfig.social.additional  == 'no'  %} {{ 'hidden' }} {% endif %}">
+          <thead >            
+            <tr >
+              <td class="text-left" width="60%">{{ additional_fields_yes_heading }}</td>              
+              <td class="text-center" width="20%">{{ show_title }}</td>
+              <td class="text-center" width="20%">{{ required_title }}</td>                            
+            </tr>
+          </thead>
+               {% for key, field in fields %}
+               {% if  field.social%}
+		          <tr>
+					<td class="text-left">
+					{{ field.title?'<span data-toggle="tooltip" title="'~field.title~'">':'' }}{{ field_title[key] }}{{ field.title?'</span>':'' }}
+					
+					</td>                  
+		            <td class="text-center">
+		            <input type="checkbox" value ="1" name="social[fields][{{ key }}][show]" {{ xconfig['social']['fields'][key]['show']?'checked="checked"':'' }}  />	            
+		            </td>
+		            <td class="text-center">
+		            {% if  field.required_default  and  field.required_default%}
+		            {{ always_mandatory_heading }}
+		            {% elseif  field.required  and  not field.required %}
+		            {{ cannot_mandatory_heading }}
+		            {% else %}
+		            <input type="checkbox" value="1"  name="social[fields][{{ key }}][required]" {{ not field.required?'disabled="disabled"': ''}} {{ xconfig['social']['fields'][key]['required']?'checked="checked"': ''}} />
+		            {% endif %}
+		            </td>            
+				  </tr>
+				{% endif %}
+				{% endfor %}
+</table>  
+</div>
+</div>
+</div>
+  
+</div>
+<div id="tab-override" class="tab-pane">
+<ul class="nav nav-tabs tab-horizontal">         
+<li class="active"><a href="#tab-colors" data-toggle="tab">{{ custom_colors_heading }}</a></li>
+<li><a href="#tab-css" data-toggle="tab">{{ custom_css_tab_heading }}</a></li>
+<li><a href="#tab-js" data-toggle="tab">{{ custom_js_tab_heading }}</a></li>
+</ul>
+<div class="tab-content">
+<div id="tab-colors" class="tab-pane active">
+<div class="panel panel-default">
+<div class="panel-heading"><h3 class="pane-title" style="text-transform: capitalize;">{{ text_design_option }}</h3></div>
+<div class="panel-body" >
+<div class="design">
+{% for key, design in xtensions_design %}
+<div class="design-options">
+<div class="colors">
+{% for color in design.placeholder  %}
+<div class="sub-color" style="background: {{ color }}"></div>
+{% endfor %}
+</div>
+<div class="xform text-center" style="display: block">
+<div class="radio-group">
+<input type="radio" id="option-design_{{ key }}" value="{{ key }}" {% if   xconfig.design.type  and  xconfig.design.type  ==  key %} {{ 'checked' }} {% endif %} name="design[type]" />
+<label for="option-design_{{ key }}">{{ design.title }}</label>
+</div>
+</div>
+</div>
+{% endfor %}
+<div class="design-options">
+<div class="colors">
+<div class="sub-color" style="background: red;"></div>
+<div class="sub-color" style="background: green;"></div>
+<div class="sub-color" style="background: blue;"></div>
+</div>
+<div class="xform text-center" style="display: block">
+<div class="radio-group">
+<input type="radio" id="option-design_custom" value="custom"  name="design[type]" {% if   xconfig.design.type  and  xconfig.design.type  == 'custom' %} {{ 'checked' }} {% endif %}/>
+<label for="option-design_custom">{{ text_design_custom }}</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="custom_design custom-colors">
+{% for key, section in xtensions_color_section %}
+<div class="panel" style="margin-bottom: 0;">
+<div class="panel-heading" style="border-top:1px solid #ddd;"><h5 class="pane-title" style="text-transform: capitalize;">{{ text_xtensions_color_section[key] }}</h5></div>
+<div class="panel-body">
+<div class="row">
+{% for colors in section %}
+<div class="col-md-6" style="min-height: 60px;">
+<div class="form-group">
+<label class="col-sm-6 control-label">{{ xtensions_colors[colors] }}</label>
+<div class="col-sm-6">
+<div class="input-group colorpicker-component">
+    <input type="text" name="colors[{{ colors }}]" value="{{ xconfig['colors'][colors]?xconfig['colors'][colors]: xtensions_custom_color[colors]}}" class="form-control" />
+    <span class="input-group-addon"><i></i></span>
+</div>             
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+{% endfor %}
+
+</div>
+</div>
+</div>
+<div id="tab-css" class="tab-pane">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+    <thead >            
+            <tr >
+              <td class="text-center" >{{ custom_css_heading }}</td>     
+            </tr>
+          </thead>
+              <tr>
+              <td><textarea  id="custom_css" name="design[css]" class="form-control" rows="20">{{ xconfig.design.css?xconfig.design.css: '' }}</textarea></td>
+              </tr>
+              
+</table>
+</div>
+</div>
+<div id="tab-js" class="tab-pane">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover">
+    <thead >            
+            <tr >
+              <td class="text-center">{{ custom_js_heading }}</td>     
+            </tr>
+          </thead>          
+              
+              <tr>
+              <td><textarea id="custom_js" name="design[js]" class="form-control"  rows="20">{{ xconfig.design.js?xconfig.design.js: ''}}</textarea></td>
+              </tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<div id="tab-export-import" class="tab-pane">
+<form action="{{ export }}" method="post" enctype="multipart/form-data" id="form-import" class="form-horizontal">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" colspan="2"><i class="fa fa-download"></i>&nbsp;{{ button_export_settings }}</td>                                          
+            </tr>
+          </thead>               
+              <tr>
+              <td class="text-left" style="width: 30%;">
+              <select name="export_store_id" class="form-control">
+			  <option value="0" {{ store_id == 0?'selected="selected"':'' }}>{{ default_heading }}</option>			  
+	          {% for store in stores %} 
+	  		  <option value="{{ store.store_id }}" {{ store_id == store.store_id?'selected="selected"':'' }}>{{ store.name }}</option>
+	          {% endfor %} 
+			  </select>
+	  		  </td>              
+        	  <td class="text-left"> 
+        	  <button type="submit" data-toggle="tooltip" title="{{ button_export_settings }}" class="btn btn-primary"><i class="fa fa-download"></i></button>
+        	  </td>
+              </tr>                                                       
+</table>
+</form>
+<form action="{{ import }}" method="post" enctype="multipart/form-data" id="form-import" class="form-horizontal">
+<table class="table table-striped table-bordered table-hover">
+          <thead >            
+            <tr >
+              <td class="text-left" colspan="3"><i class="fa fa-upload"></i>&nbsp;{{ button_import_settings }}</td>                                          
+            </tr>
+          </thead>               
+              <tr>
+              <td class="text-left" style="width: 30%;">
+              <input type="file" name="import_file" id="input-file" class="form-control" style="max-width: 200px;display: inline-block;" />
+              </td>
+              <td class="text-left" style="width: 30%;">
+              <select name="import_store_id" class="form-control">
+              <option value="0" {{ store_id == 0?'selected="selected"':'' }}>{{ default_heading }}</option>			  
+	          {% for store in stores %} 
+	  		  <option value="{{ store.store_id }}" {{ store_id == store.store_id?'selected="selected"':'' }}>{{ store.name }}</option>
+	          {% endfor %} 
+			  </select>
+	  		  </td>              
+        	  <td class="text-left"> 
+        	  <button type="submit" data-toggle="tooltip" title="{{ button_import_settings }}" class="btn btn-primary"><i class="fa fa-upload"></i></button>
+        	  </td>
+              </tr>                                                       
+</table>
+</form>
+</div>
+<div id="tab-support-license" class="tab-pane">
+<ul class="nav nav-tabs tab-horizontal">
+  <li class="active"><a href="#tab-license" data-toggle="tab">{{ tab_license_validate }}</a></li>
+  <li><a href="#help-reg" data-toggle="tab">{{ register_heading }}</a></li>
+  <li><a href="#help-edit" data-toggle="tab">{{ edit_heading }}</a></li>
+  <li><a href="#help-checkout" data-toggle="tab">{{ checkout_heading }}</a></li>  
+  <li><a href="#help-keyp" data-toggle="tab">{{ key_points_heading }}</a></li>
+  <li><a href="#help-ufeatures" data-toggle="tab">{{ upcoming_features_heading }}</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="tab-license">
+<div id="validatelicense">
+<div class="well licensewell">
+<div class="row">
+{% if config_license['module_xtensions_checkout_activation_code'] is defined %}
+<div class="col-sm-6">
+<table class="table">
+<tr>
+<td>{{ text_license }}</td>
+<td><span class="text-success"><i class="fa fa-check-circle-o"></i> {{ text_license_valid }}</span></td>
+</tr>
+{% if config_license['module_xtensions_checkout_license_code'] is defined %}
+<tr>
+<td>{{ text_license_code }}</td>
+<td>{{ config_license['module_xtensions_checkout_license_code'] }}</td>
+</tr>
+{% endif %}
+{% if config_license['module_xtensions_checkout_user_name'] is defined %}
+<tr>
+<td>{{ text_license_user }}</td>
+<td>{{ config_license['module_xtensions_checkout_user_name'] }}</td>
+</tr>
+{% endif %}
+{% if config_license['module_xtensions_checkout_date_support'] is defined %}
+<tr>
+<td>{{ text_license_support_date_expiry }}</td>
+<td>{{ config_license['module_xtensions_checkout_date_support'] }}</td>
+</tr>
+{% endif %}
+</table>
+</div>
+{% else %}
+<div class="col-sm-6">
+<form role="form" id="form_validate" action="#" autocomplete="off" method="post" novalidate enctype="multipart/form-data">
+<div class="form-group">
+<label for="input-username">{{ text_license_code }}</label>
+<div class="input-group"><span class="input-group-addon"><i class="fa fa-lock"></i></span>
+<input type="text" name="licensecode" value="" placeholder="{{ text_license_code }}" id="input-licensecode" class="form-control">
+<div class="input-group-addon validatelicense">{{ text_license_validate }}</div>
+</div>
+<div class="alert alert-danger xtensionsalert" style="margin-top:10px">{{ text_license_alert }}<span style="margin-left: 20px;"><a id="howtovalidate" href="{{ xtensions_docs }}" target="_newtab" class="btn btn-success">{{ text_how_to_validate }}</a></span></div>
+</div>
+</form>
+</div>
+{% endif %}
+<div class="col-sm-6">
+<table class="table table-striped table-hover">
+{% for text in tab_help['content']['help-support'] %}  
+<tr><td><ul><li>{{ text }}</li></ul></td></tr>
+{% endfor %}
+</table>
+</div>
+</div> 
+</div>
+</div>
+</div>
+<div class="tab-pane" id="help-reg">
+<table class="table table-striped table-hover">  
+{% for text in tab_help['content']['help-reg'] %}  
+<tr><td><ul><li>{{ text }}</li></ul></td></tr>
+{% endfor %}
+</table>
+</div>
+<div class="tab-pane" id="help-edit">
+<table class="table table-striped table-hover">
+{% for text in tab_help['content']['help-edit'] %}  
+<tr><td><ul><li>{{ text }}</li></ul></td></tr>
+{% endfor %}
+</table>
+</div>
+<div class="tab-pane" id="help-checkout">
+<table class="table table-striped table-hover">
+{% for text in tab_help['content']['help-checkout'] %}  
+<tr><td><ul><li>{{ text }}</li></ul></td></tr>
+{% endfor %}
+</table>
+</div>
+<div class="tab-pane" id="help-keyp">
+<table class="table table-striped table-hover">
+{% for text in tab_help['content']['help-keyp'] %}  
+<tr><td><ul><li>{{ text }}</li></ul></td></tr>
+{% endfor %}
+</table>
+</div>
+<div class="tab-pane" id="help-ufeatures">
+<table class="table table-striped table-hover">
+ {% for text in tab_help['content']['help-ufeatures'] %}  
+<tr><td><ul><li>{{ text }}</li></ul></td></tr>
+{% endfor %}
+</table>
+</div>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+  </div>
+  </div>
+<script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+<link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+<script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+<script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+<link href="view/javascript/xtensions/codemirror/lib/codemirror.css" rel="stylesheet" />
+<link href="view/javascript/xtensions/codemirror/lib/show-hint.css" rel="stylesheet" />
+<link href="view/javascript/xtensions/codemirror/theme/oceanic-next.css" rel="stylesheet" />
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/codemirror.js"></script>
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/show-hint.js"></script>
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/css-hint.js"></script>
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/javascript-hint.js"></script> 
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/autorefresh.js"></script>
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/css.js"></script> 
+<script type="text/javascript" src="view/javascript/xtensions/codemirror/lib/javascript.js"></script>
+<script type="text/javascript" src="{{ xtensions_support }}help/xsupport"></script>   
+<script type="text/javascript">
+var xtensions_module = '{{ xtensions_module }}';
+var image_row = {{ image_row }};
+
+function addImage() {
+	html  = '<tr id="image-row' + image_row + '">';
+	html += '  <td class="text-left"><a href="" id="thumb-image' + image_row + '"data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="options[footer][images][]" value="" id="input-image' + image_row + '" /></td>';	
+	html += '  <td class="text-left"><button type="button" onclick="$(\'#image-row' + image_row  + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+	html += '</tr>';
+
+	$('#images tbody').append(html);
+
+	image_row++;
+}
+$('select[name=\'store_id\']').bind('change', function() {
+	location = 'index.php?route={{ xtensions_admin_xcheckout_path }}&user_token={{ user_token }}&store_id=' + this.value;
+});
+$('select[name=\'options[country_id]\']').bind('change', function() {
+  $.ajax({
+    url: 'index.php?route={{ xtensions_admin_xcheckout_path }}/country&user_token={{ user_token }}&country_id=' + this.value,
+    dataType: 'json',          
+    success: function(json) {     
+      html='';
+    if (json['zone'] != '' && undefined !=json['zone']) {
+        html = '<option value="999">--Please Select--</option>';
+        for (i = 0; i < json['zone'].length; i++) {
+              html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+            
+          if (json['zone'][i]['zone_id'] =='{{ xconfig.options.zone_id  and  xconfig.options.zone_id?xconfig.options.zone_id:"" }}') {
+                html += ' selected="selected"';
+            }
+  
+                 html += '>' + json['zone'][i]['name'] + '</option>';
+        }
+      } else {
+        html += '<option value="0" selected="selected">--None--</option>';
+      }
+      
+      $('select[name=\'options[zone_id]\']').html(html);
+    },
+    error: function(xhr, ajaxOptions, thrownError) {
+      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+    }
+  });
+});
+$('select[name=\'options[country_id]\']').trigger('change');
+$('input[name=\'design[type]\']').bind('change', function() {
+	changeDesign();
+});
+function changeDesign(){
+	if($('input[name=\'design[type]\']:checked').val() == 'custom'){
+		$('.custom-colors').show();
+	 }else{
+		$('.custom-colors').hide();
+	 }
+}
+changeDesign();
+$(function() {
+    $('.colorpicker-component').colorpicker({
+		'format':'hex'
+    });
+});
+$(document).on("submit", "#form_validate", function(event) {	
+	event.preventDefault();	
+	$('.validatelicense').trigger('click');
+});
+{% if config_license['module_xtensions_checkout_activation_code'] is not defined  %}
+function submitLicense(activation_code,license_code,user_name,date_support,message){
+	$.ajax({
+	    url: 'index.php?route={{ xtensions_admin_xcheckout_path }}/license&user_token={{ user_token }}&activation_code=' + activation_code +'&license_code=' + license_code +'&user_name=' + user_name +'&date_support=' + date_support,
+	    dataType: 'json',          
+	    success: function(json) {
+	      $('#form_validate').before('<div class="alert alert-success"><i class="fa fa-check-circle-o"></i> '+message+'</div>');     
+	      $('#form_validate').remove();
+	    },
+	    error: function(xhr, ajaxOptions, thrownError) {
+	      alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	    }
+	  });
+}
+{% endif %}
+</script>
+<script type="text/javascript">
+ var codemirrorcssold;
+ var codemirrorjsold;
+ window.onload = function () {
+ var codemirrorCss = CodeMirror.fromTextArea(document.querySelector('#custom_css'), {
+		mode: 'text/css',
+		height: '500px',
+		lineNumbers: true,
+		theme: 'oceanic-next',
+		extraKeys: {"Ctrl-Space": "autocomplete"},
+	});
+ codemirrorCss.refresh();
+ codemirrorcssold = codemirrorCss;
+ var codemirrorJs = CodeMirror.fromTextArea(document.querySelector('#custom_js'), {
+		mode: 'text/javascript',
+		height: '500px',
+		lineNumbers: true,
+		theme: 'oceanic-next',
+		extraKeys: {"Ctrl-Space": "autocomplete"},
+	});
+ codemirrorJs.refresh();
+codemirrorjsold = codemirrorJs;
+ };
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {	
+	var target = $(e.target).attr("href");
+	if(target == '#tab-css'){
+		codemirrorcssold.refresh();
+	}else if(target == '#tab-js'){		
+		codemirrorjsold.refresh();
+	}
+});
+</script>
+{{ footer }}

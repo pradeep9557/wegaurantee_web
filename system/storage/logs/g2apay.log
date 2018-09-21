@@ -1,0 +1,96 @@
+2017-12-24 5:01:21 - Origin: ControllerExtensionPaymentG2APay::checkout
+2017-12-24 5:01:21 - 995.00
+2017-12-24 5:01:21 - Origin: ControllerExtensionPaymentG2APay::checkout
+2017-12-24 5:01:21 - Array
+(
+    [0] => stdClass Object
+        (
+            [sku] => 42
+            [name] => Apple Cinema 30&quot;
+            [amount] => 990
+            [qty] => 11
+            [id] => 42
+            [price] => 90.0000
+            [url] => http://weguarantee.in/new/index.php?route=product/product&amp;product_id=42
+        )
+
+)
+
+2017-12-24 5:01:21 - Origin: ControllerExtensionPaymentG2APay::checkout
+2017-12-24 5:01:21 - Array
+(
+    [api_hash] => 15711
+    [hash] => 29993b27864e7a951259ddcfa326844f0498336d52e61c72aefdcd889880b8c4
+    [order_id] => 3
+    [amount] => 995.00
+    [currency] => INR
+    [email] => om.prakash80@gmail.com
+    [url_failure] => http://weguarantee.in/new/index.php?route=checkout/failure
+    [url_ok] => http://weguarantee.in/new/index.php?route=extension/payment/g2apay/success
+    [items] => [{"sku":"42","name":"Apple Cinema 30&quot;","amount":990,"qty":"11","id":"42","price":"90.0000","url":"http:\/\/weguarantee.in\/new\/index.php?route=product\/product&amp;product_id=42"}]
+)
+
+2017-12-24 5:04:39 - Origin: ControllerExtensionPaymentG2APay::checkout
+2017-12-24 5:04:39 - 995.00
+2017-12-24 5:04:39 - Origin: ControllerExtensionPaymentG2APay::checkout
+2017-12-24 5:04:39 - Array
+(
+    [0] => stdClass Object
+        (
+            [sku] => 42
+            [name] => Apple Cinema 30&quot;
+            [amount] => 990
+            [qty] => 11
+            [id] => 42
+            [price] => 90.0000
+            [url] => http://weguarantee.in/new/index.php?route=product/product&amp;product_id=42
+        )
+
+)
+
+2017-12-24 5:04:39 - Origin: ControllerExtensionPaymentG2APay::checkout
+2017-12-24 5:04:39 - Array
+(
+    [api_hash] => 15711
+    [hash] => 394cdeb53a514343923db77da8a5787f64286c0b64ab8bbf6926c2698d60175a
+    [order_id] => 4
+    [amount] => 995.00
+    [currency] => INR
+    [email] => om.prakash80@gmail.com
+    [url_failure] => http://weguarantee.in/new/index.php?route=checkout/failure
+    [url_ok] => http://weguarantee.in/new/index.php?route=extension/payment/g2apay/success
+    [items] => [{"sku":"42","name":"Apple Cinema 30&quot;","amount":990,"qty":"11","id":"42","price":"90.0000","url":"http:\/\/weguarantee.in\/new\/index.php?route=product\/product&amp;product_id=42"}]
+)
+
+2018-01-01 13:07:26 - Origin: ControllerExtensionPaymentG2APay::checkout
+2018-01-01 13:07:26 - 105.00
+2018-01-01 13:07:26 - Origin: ControllerExtensionPaymentG2APay::checkout
+2018-01-01 13:07:26 - Array
+(
+    [0] => stdClass Object
+        (
+            [sku] => 41
+            [name] => iMac
+            [amount] => 100
+            [qty] => 1
+            [id] => 41
+            [price] => 100.0000
+            [url] => http://weguarantee.in/new/index.php?route=product/product&amp;product_id=41
+        )
+
+)
+
+2018-01-01 13:07:26 - Origin: ControllerExtensionPaymentG2APay::checkout
+2018-01-01 13:07:26 - Array
+(
+    [api_hash] => 15711
+    [hash] => 903b4338d9a947a24efead103abbfadb164b12eb0d0684e674507bc75ef65b92
+    [order_id] => 5
+    [amount] => 105.00
+    [currency] => INR
+    [email] => om.prakash80@gmail.com
+    [url_failure] => http://weguarantee.in/new/index.php?route=checkout/failure
+    [url_ok] => http://weguarantee.in/new/index.php?route=extension/payment/g2apay/success
+    [items] => [{"sku":"41","name":"iMac","amount":100,"qty":"1","id":"41","price":"100.0000","url":"http:\/\/weguarantee.in\/new\/index.php?route=product\/product&amp;product_id=41"}]
+)
+
