@@ -95,8 +95,14 @@ class ControllerRestSimpleConfirm extends RestController
                 unset($this->session->data['voucher']);
                 unset($this->session->data['vouchers']);
                 unset($this->session->data['totals']);
-            } 
+            }
+            //error_log('confirmOrder order_id unset');
+            //unset($this->session->data['order_id']);
+            //error_log($this->session->data['order_id']); 
         } else {
+            //error_log('confirmOrder order_id unset');
+            //unset($this->session->data['order_id']);
+            //error_log($this->session->data['order_id']);
             $this->statusCode = 400;
             $this->json['error'][] = "No order in session";
         }
@@ -371,9 +377,7 @@ class ControllerRestSimpleConfirm extends RestController
                     $order_data['accept_language'] = '';
                 }
                 $this->load->model('checkout/order');
-                if(!$this->session->data['order_id']){
                     $this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
-                }
 
                 $data['products'] = array();
                 foreach ($this->cart->getProducts() as $product) {
