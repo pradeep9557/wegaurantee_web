@@ -25,9 +25,9 @@ class ControllerRestLogout extends RestController
 
             if ($this->customer->isLogged()) {
                 $this->event->trigger('pre.customer.logout');
-
-                $this->customer->logout();
                 $this->cart->clear();
+                $this->customer->logout();
+                
 
                 unset($this->session->data['wishlist']);
                 unset($this->session->data['shipping_address']);

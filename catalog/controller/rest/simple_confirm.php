@@ -20,9 +20,13 @@ class ControllerRestSimpleConfirm extends RestController
         //error_log('-----------------------------------asd');
         error_log($this->session->data['order_id']);
         error_log(json_encode($_SERVER));
-        $post = $this->getPost();
-        error_log(json_encode($post));
+
         $this->saveOrderToDatabase();
+    }
+
+    public function checkoutforapp()
+    {
+        return $this->sendResponse();
     }
 
     public function confirm()
