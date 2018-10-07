@@ -7,7 +7,7 @@
 $('#button-confirm').on('click', function() {
 	$.ajax({
 		type: 'get',
-		url: 'index.php?route=extension/payment/cod_order_fee/confirm',
+		url: 'http://uat.weguarantee.in/index.php?route=extension/payment/cod_order_fee/confirm',
 		cache: false,
 		beforeSend: function() {
 			$('#button-confirm').button('loading');

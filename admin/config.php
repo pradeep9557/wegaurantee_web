@@ -1,11 +1,11 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://192.168.0.29/projects/weapp/live/admin/');
-define('HTTP_CATALOG', 'http://192.168.0.29/projects/weapp/live/');
+define('HTTP_SERVER', 'http://192.168.0.2/projects/weapp/live/admin/');
+define('HTTP_CATALOG', 'http://192.168.0.2/projects/weapp/live/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://192.168.0.29/projects/weapp/live/admin/');
-define('HTTPS_CATALOG', 'http://192.168.0.29/projects/weapp/live/');
+define('HTTPS_SERVER', 'http://192.168.0.2/projects/weapp/live/admin/');
+define('HTTPS_CATALOG', 'http://192.168.0.2/projects/weapp/live/');
 
 // DIR
 define('DIR_APPLICATION', '/Users/user/www/projects/weapp/live/admin/');

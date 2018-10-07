@@ -43,6 +43,7 @@ class Customer {
 	}
 
   public function login($email, $password, $override = false) {
+  		// error_log('message12');
 		if ($override) {
 			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(utf8_strtolower($email)) . "' AND status = '1'");
 		} else {
@@ -83,6 +84,7 @@ class Customer {
 	}
 
 	public function isLogged() {
+		// error_log('message');
 		return $this->customer_id;
 	}
 

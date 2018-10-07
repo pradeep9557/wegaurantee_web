@@ -69,7 +69,6 @@ class ControllerRestPaymentAddress extends RestController
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //save payment address information to session
             $post = $this->getPost();
-
             $existing = false;
 
             if (isset($this->request->get['existing']) && !empty($this->request->get['existing'])) {
@@ -255,9 +254,12 @@ class ControllerRestPaymentAddress extends RestController
                         $post["company"] = "";
                     }
 
-
-                    $address_id = $this->model_account_address->addAddress($this->customer->getId(), $post);
-
+                    if($post['existing']=='1'){
+                        $address_id = $this->model_account_address->editAddress($post['address_id'], $post);
+                    }else{
+                        $address_id = $this->model_account_address->addAddress($this->customer->getId(), $post);
+                    }
+                    
                     $this->session->data['payment_address'] = $this->model_account_address->getAddress($address_id);
 
                     unset($this->session->data['payment_method']);

@@ -19,6 +19,19 @@ class ControllerRestAccount extends RestController
 
     private $error = array();
 
+    public function fpassword(){
+        $this->checkPlugin();
+       if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $post = $this->getPost();
+            $this->resetPassword($post);
+       }else{
+            $this->statusCode = 405;
+            $this->allowedHeaders = array("POST", "PUT");
+       }
+
+        return $this->sendResponse();
+    }
+
     public function account()
     {
 
@@ -103,6 +116,31 @@ class ControllerRestAccount extends RestController
 
             $this->json["data"] = $user;
         }
+    }
+
+    public function resetPassword($post){
+        $data=array();
+        if ($this->customer->isLogged()) {
+            $this->json['error'][] = "User is logged in";
+            $this->statusCode = 403;
+        } else {
+            if ($this->validate($post)) {
+                $this->load->model('account/customer');
+                $this->model_account_customer->editCode($post['email'], token(40));
+                $this->session->data['success'] = $this->language->get('text_success');
+                $data['result']="success";
+                $data['msg']=$this->language->get('text_success');
+                $this->json['data'] = $data;
+                $this->json['success']=1;
+                $this->response->addHeader('Content-Type: application/json');
+                $this->response->setOutput(json_encode($data));
+                $this->response->output();
+            } else {
+                $this->json['error'][] = $this->error;
+                $this->statusCode = 400;
+            }
+        }
+        return $this->sendResponse();
     }
 
     public function saveAccount($post)

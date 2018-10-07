@@ -4,14 +4,24 @@ class ControllerExtensionPaymentG2APay extends Controller {
 		$this->load->language('extension/payment/g2apay');
 
 		$data['action'] = $this->url->link('extension/payment/g2apay/checkout', '', true);
+		$this->load->model('checkout/order');
+		$this->load->model('setting/extension');
+		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+		$order_total = number_format($order_info['total'], 2); 
+		$data['total'] = $order_total;
 		return $this->load->view('extension/payment/g2apay', $data);
 	}
 
 	public function checkout() {
+		error_log('entered');
+		$fetchingData=json_decode(file_get_contents('php://input'));
+		if(!$this->session->data['order_id']){
+			$this->session->data['order_id']=$fetchingData->data->order_id;
+		}
+		
 		$this->load->model('checkout/order');
 		$this->load->model('account/order');
 		$this->load->model('extension/payment/g2apay');
-
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
 		$order_data = array();

@@ -78,9 +78,12 @@ class ModelCatalogProduct extends Model {
 						  WHERE pd.language_id = '" . (int)$this->config->get('config_language_id') . "'
 						  AND p.status = '1' AND p.date_available <= NOW()
 						  AND p2s.store_id = '" . (int)$this->config->get('config_store_id')."'";
+						  
+						  	$sql.= $this->filterSql($data);
 
-					$sql.= $this->filterSql($data);
-
+						  
+					
+						  	error_log(json_encode($sql));
 					$query = $this->db->query($sql);
 
 					if ($query->num_rows) {
@@ -100,6 +103,7 @@ class ModelCatalogProduct extends Model {
 								}
 							}
 						}
+						
 						return $product_data;
 					} else {
 						return false;
@@ -338,7 +342,7 @@ class ModelCatalogProduct extends Model {
 
 
                     if(empty($onlycount)) {
-
+                    	
                         $sql .= " GROUP BY p.product_id";
 
                         $sort_data = array(
@@ -354,19 +358,29 @@ class ModelCatalogProduct extends Model {
                         );
 
                         if (isset($data['sort']) && in_array($data['sort'], array_keys($sort_data))) {
+                        	
                             if ($data['sort'] == 'name' || $data['sort'] == 'model') {
+                            	
                                 $sql .= " ORDER BY LCASE(" . $sort_data[$data['sort']] . ")";
                             } elseif ($data['sort'] == 'price') {
+                            	
                                 $sql .= " ORDER BY (CASE WHEN special IS NOT NULL THEN special WHEN discount IS NOT NULL THEN discount ELSE p.price END)";
                             } else {
+                            	
                                 $sql .= " ORDER BY " . $sort_data[$data['sort']];
                             }
+                        } elseif($data['sort'] == 'priceorder') {
+                            		
+                            		$sql .= " ORDER BY p.price ".$data['sortorder'];
                         } else {
+                        	
                             $sql .= " ORDER BY p.sort_order";
                         }
 
                         if (isset($data['order']) && (strtolower($data['order']) == strtolower('DESC'))) {
                             $sql .= " DESC, LCASE(pd.name) DESC";
+                        } elseif($data['sort'] == 'priceorder') {
+                        	//$sql .= ' '.$data['sortorder'].", LCASE(pd.name) ASC";
                         } else {
                             $sql .= " ASC, LCASE(pd.name) ASC";
                         }
@@ -389,7 +403,6 @@ class ModelCatalogProduct extends Model {
                             $sql .= " LIMIT " . $offset . "," . $limit;
                         }
                     }
-
                 return $sql;
             }
 

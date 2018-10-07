@@ -110,6 +110,7 @@ class Hybrid_Provider_Adapter {
 	 * @throw Exception
 	 */
 	function login() {
+		// error_log('message1');
 		Hybrid_Logger::info("Enter Hybrid_Provider_Adapter::login( {$this->id} ) ");
 
 		if (!$this->adapter) {

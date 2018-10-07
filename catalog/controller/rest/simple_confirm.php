@@ -26,7 +26,95 @@ class ControllerRestSimpleConfirm extends RestController
 
     public function checkoutforapp()
     {
-        return $this->sendResponse();
+        $this->checkPlugin();
+        $post= $this->getPost();
+        $this->json["data"] = $post;
+        $this->load->model('checkout/order');
+        $this->load->model('account/order');
+        $this->load->model('extension/payment/g2apay');
+
+        $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+
+        $order_data = array();
+
+        $this->load->model('setting/extension');
+
+        $totals = array();
+        $taxes = $this->cart->getTaxes();
+        $total = 0;
+
+        // Because __call can not keep var references so we put them into an array.
+        $total_data = array(
+            'totals' => &$totals,
+            'taxes'  => &$taxes,
+            'total'  => &$total
+        );
+
+        $i = 0;
+
+        $results = $this->model_setting_extension->getExtensions('total');
+        
+
+        foreach ($results as $result) {
+            if ($this->config->get('total_' . $result['code'] . '_status')) {
+                $this->load->model('extension/total/' . $result['code']);
+
+                // We have to put the totals in an array so that they pass by reference.
+                $this->{'model_extension_total_' . $result['code']}->getTotal($total_data);
+
+                if (isset($order_data['totals'][$i])) {
+                    if (strstr(strtolower($order_data['totals'][$i]['code']), 'total') === false) {
+                        $item = new stdClass();
+                        $item->sku = $order_data['totals'][$i]['code'];
+                        $item->name = $order_data['totals'][$i]['title'];
+                        $item->amount = number_format($order_data['totals'][$i]['value'], 2);
+                        $item->qty = 1;
+                        $item->id = $order_data['totals'][$i]['code'];
+                        $item->price = $order_data['totals'][$i]['value'];
+                        $item->url = $this->url->link('common/home', '', true);
+                        $items[] = $item;
+                    }
+
+                    $i++;
+                }
+            }
+        }
+
+        $ordered_products = $this->model_account_order->getOrderProducts($this->session->data['order_id']);
+
+        foreach ($ordered_products as $product) {
+            $item = new stdClass();
+            $item->sku = $product['product_id'];
+            $item->name = $product['name'];
+            $item->amount = $product['price'] * $product['quantity'];
+            $item->qty = $product['quantity'];
+            $item->id = $product['product_id'];
+            $item->price = $product['price'];
+            $item->url = $this->url->link('product/product', 'product_id=' . $product['product_id'], true);
+            $items[] = $item;
+        }
+
+        if ($this->config->get('payment_g2apay_environment') == 1) 
+            $url =  'https://secure.ebs.in/pg/ma/payment/request';
+            else
+            $url =  'https://secure.ebs.in/pg/ma/payment/request'; 
+        $order_total = number_format($order_info['total'], 2); 
+        $string = $this->session->data['order_id'] . $order_total . $order_info['currency_code'] . html_entity_decode($this->config->get('payment_g2apay_secret'));
+
+        $fields = array(
+            'api_hash' => $this->config->get('payment_g2apay_api_hash'),
+            'hash' =>   $this->config->get('payment_g2apay_secret'),
+            'order_id' => $this->session->data['order_id'],
+            'amount' => $order_total,
+            'currency' => $order_info['currency_code'],
+            'email' => $order_info['email'],
+            'url_failure' => $this->url->link('checkout/failure'),
+            'url_ok' => $this->url->link('extension/payment/g2apay/success'),
+            'items' => json_encode($items)
+        );
+        $data['fields'] = $fields;
+        $this->response->setOutput(json_encode($this->load->view('extension/payment/g2apayhdfc', $data))); 
+    
     }
 
     public function confirm()
@@ -457,7 +545,6 @@ class ControllerRestSimpleConfirm extends RestController
                     $data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
                 }
                 $data['order_id'] = $this->session->data['order_id'];
-                error_log($data);
                 $this->json["data"] = $data;
             }
         }

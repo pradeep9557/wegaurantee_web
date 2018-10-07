@@ -471,6 +471,10 @@ class ControllerFeedRestApi extends RestController
         if (isset($request->get['sort']) && !empty($request->get['sort'])) {
             $parameters["sort"] = $request->get['sort'];
         }
+        
+        if (isset($request->get['sortorder']) && !empty($request->get['sortorder'])) {
+            $parameters["sortorder"] = $request->get['sortorder'];
+        }
 
         /*check order parameter*/
         if (isset($request->get['order']) && !empty($request->get['order'])) {
