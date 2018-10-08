@@ -136,6 +136,48 @@ class ControllerRestLogin extends RestController
                 $this->json['error'][] = "User is logged.";
                 $this->statusCode = 400;
             } else {
+
+                $this->load->model('account/customer');
+                $customer_info = $this->model_account_customer->getCustomerByEmail($post['email']);
+
+                if (!isset($post['provider']) || ($post['provider'] != 'facebook' && $post['provider'] != 'google')) {
+                    $this->json['error'][] = "Invalid social provider. Valid providers: facebook, google";
+                    $this->statusCode = 400;
+                }
+
+                if (isset($social) && ($social['email'] != $post['email'])) {
+                        $this->json['error'][] = "Social email and posted email mismatch";
+                        $this->statusCode = 400;
+                    } else {
+                        if (isset($post['name'])) {
+                            $exploded = explode(' ', $post['name']);
+                            $firstname = array_shift($exploded);
+                            $lastname = implode(' ', $exploded);
+                        }
+                    }
+
+                    if (!$customer_info) {
+                        $data['email'] = $post['email'];
+                        $data['firstname'] = $firstname;
+                        $data['lastname'] = $lastname;
+                        $data['telephone'] = "";
+                        $data['address_1'] = "";
+                        $data['city'] = "";
+                        $data['postcode'] = "";
+                        $data['country'] = "";
+                        $data['zone_id'] = "";
+                        $data['fax'] = "";
+                        $data['company'] = "";
+                        $data['address_2'] = "";
+                        $data['country_id'] = "";
+                        $data['approved'] = 1;
+                        $data['status'] = 1;
+                        $data['password'] = md5(microtime());
+
+                        $this->model_account_customer->addCustomer($data);
+                        $customer_info = $this->model_account_customer->getCustomerByEmail($post['email']);
+                    }
+
                 if (!$this->customer->login($post['email'],'',true)) {
                     $this->json['error'][] = $this->language->get('error_login');
                     $this->statusCode = 403;
